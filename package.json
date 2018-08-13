@@ -1,0 +1,23 @@
+{
+  "name": "ag-grid-demo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "ag-grid": "^18.1.2",
+    "ag-grid-react": "^18.1.0",
+    "moment": "^2.22.2",
+    "react": "^16.4.2",
+    "react-datepicker": "^1.6.0",
+    "react-dom": "^16.4.2",
+    "react-dom-factories": "^1.0.2",
+    "react-responsive-modal": "^3.2.0",
+    "react-scripts": "1.1.4",
+    "react-select": "^2.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
