@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import "./App.css";
-
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid/dist/styles/ag-grid.css";
 import "ag-grid/dist/styles/ag-theme-balham.css";
 import "react-datepicker/dist/react-datepicker.css";
 import Modal from "react-responsive-modal";
 
-import carData from "./cars-data.json";
+import "./App.css";
+import carData from "./cars-data2.json";
 import Expand from "./Expand";
 import CustomSelectEditor from "./CustomSelectEditor";
 import ControlBoard from "./ControlBoard";
@@ -19,6 +18,7 @@ class App extends Component {
     rowData: carData.rowData,
     openModal: false,
     selectedData: "",
+    pinColCount: this.countPinnedCols(carData.colDefs),
     frameworkComponents: { Expand, CustomSelectEditor, CustomDatePicker }
     // components: { datePicker: getDatePicker() }
   };
@@ -35,15 +35,36 @@ class App extends Component {
     const categoryCol = arr[4];
     categoryCol.cellEditorParams.onChange = v => this.setSelectedCategory(v);
     arr[4] = categoryCol;
-    console.log(arr);
 
     const dateCol = arr[7];
     dateCol.cellEditorParams.onChange = v => this.setSelectedDate(v);
     arr[7] = dateCol;
-    console.log(arr);
 
     return arr;
   }
+
+  countPinnedCols(arr) {
+    let numOfPins = 0;
+    for (let i = 0; i < arr.length; i++) {
+      const element = arr[i];
+      if (element.hasOwnProperty("pinned") && element.pinned === true) {
+        numOfPins = i + 1;
+      } else {
+        break;
+      }
+    }
+    return numOfPins;
+  }
+
+  addOnePinnedCol = () => {
+    // state - 1 to get last pinned col, then + 1 to get next col
+    const indexOfColToBePinned = this.state.pinColCount;
+    const newColumnDefs = this.state.columnDefs;
+    const tempObj = newColumnDefs[indexOfColToBePinned];
+    tempObj.pinned = true;
+    newColumnDefs[indexOfColToBePinned] = tempObj;
+    this.setState({ columnDefs: newColumnDefs });
+  };
 
   setSelectedCategory = value => {
     const selectedNode = this.gridApi.getSelectedNodes();
@@ -87,6 +108,7 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div
         className="ag-theme-balham"
@@ -100,7 +122,10 @@ class App extends Component {
           {/* <p>The row data will show here.</p> */}
         </Modal>
         {/* <button onClick={this.onButtonClick}>Get selected rows</button> */}
-        <ControlBoard />
+        <ControlBoard
+          pinColCount={this.state.pinColCount}
+          addOnePinnedCol={this.addOnePinnedCol}
+        />
         <AgGridReact
           onGridReady={params => (this.gridApi = params.api)}
           enableSorting={true}
@@ -118,29 +143,5 @@ class App extends Component {
     );
   }
 }
-
-// function getDatePicker() {
-//   function Datepicker() {}
-//   Datepicker.prototype.init = function(params) {
-//     this.eInput = document.createElement("input");
-//     this.eInput.value = params.value;
-//     $(this.eInput).datepicker({ dateFormat: "dd/mm/yy" });
-//   };
-//   Datepicker.prototype.getGui = function() {
-//     return this.eInput;
-//   };
-//   Datepicker.prototype.afterGuiAttached = function() {
-//     this.eInput.focus();
-//     this.eInput.select();
-//   };
-//   Datepicker.prototype.getValue = function() {
-//     return this.eInput.value;
-//   };
-//   Datepicker.prototype.destroy = function() {};
-//   Datepicker.prototype.isPopup = function() {
-//     return false;
-//   };
-//   return Datepicker;
-// }
 
 export default App;

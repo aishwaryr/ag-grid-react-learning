@@ -1,7 +1,6 @@
 {
   "colDefs": [
     {
-      "id": 1,
       "headerName": "",
       "field": "expand",
       "pinned": true,
@@ -9,7 +8,6 @@
       "cellRenderer": "Expand"
     },
     {
-      "id": 2,
       "headerName": "Make",
       "field": "make",
       "editable": true,
@@ -17,20 +15,17 @@
       "rowDrag": true
     },
     {
-      "id": 3,
       "headerName": "Model",
       "field": "model",
       "editable": true,
       "pinned": true
     },
     {
-      "id": 4,
       "headerName": "Price",
       "field": "price",
       "editable": true
     },
     {
-      "id": 5,
       "headerName": "Category",
       "field": "category",
       "editable": true,
@@ -46,13 +41,11 @@
       }
     },
     {
-      "id": 6,
       "headerName": "Origin",
       "field": "origin",
       "editable": true
     },
     {
-      "id": 7,
       "headerName": "Services",
       "field": "services",
       "editable": true,
@@ -62,7 +55,6 @@
       }
     },
     {
-      "id": 8,
       "headerName": "Date Added",
       "field": "dateAdded",
       "editable": true,
