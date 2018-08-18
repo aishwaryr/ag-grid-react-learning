@@ -1,5 +1,11 @@
-import { SET_FORM_DATA } from "./actions";
+import { LOAD_PRODUCTS } from "./actions";
+// import { UPDATE_PRODUCTS } from "./actions";
 
-export function setFormData(formData) {
-  return { type: SET_FORM_DATA, payload: formData };
+export function loadProducts(productsData) {
+  console.log(productsData);
+  return { type: LOAD_PRODUCTS, payload: productsData };
 }
+
+// export function updateProducts(productsData) {
+//   return { type: UPDATE_PRODUCTS, payload: productsData };
+// }
