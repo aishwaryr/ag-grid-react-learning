@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 import { LOAD_PRODUCTS } from "./actions";
+import { LOAD_MSG } from "./actions";
+import { LOAD_CARS } from "./actions";
 
 const productsData = (state = {}, action) => {
   console.log("reducer chala");
@@ -9,8 +11,25 @@ const productsData = (state = {}, action) => {
   return state;
 };
 
+const msgData = (state = {}, action) => {
+  if (action.type === LOAD_MSG) {
+    return action.payload;
+  }
+  return state;
+};
+
+const carsData = (state = [], action) => {
+  console.log(action);
+  if (action.type === LOAD_CARS) {
+    return action.payload;
+  }
+  return state;
+};
+
 const rootReducer = combineReducers({
-  productsData
+  productsData,
+  msgData,
+  carsData
 });
 
 export default rootReducer;

@@ -17,7 +17,7 @@ class DataTable extends Component {
     // rowData: carData.rowData,
     openModal: false,
     selectedData: "",
-    pinColCount: 3,
+    pinColCount: 0,
     frameworkComponents: { Expand, CustomSelectEditor, CustomDatePicker }
   };
 
@@ -29,7 +29,8 @@ class DataTable extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+    console.log("componentWillRecvPropsRan");
+    console.log(this.props.products);
     if (this.props.products) {
       this.setState({
         pinColCount: this.countPinnedCols(this.props.colDefs)
@@ -68,6 +69,7 @@ class DataTable extends Component {
         break;
       }
     }
+    console.log(numOfPins);
     return numOfPins;
   }
 
@@ -125,9 +127,7 @@ class DataTable extends Component {
     if (selectedData.length > 0) {
       this.onOpenModal();
     }
-    const selectedDataStringPresentation = selectedData
-      .map(node => node.make + " " + node.model)
-      .join(", ");
+    const selectedDataStringPresentation = selectedData.map(node => node.make + " " + node.model).join(", ");
     // console.log(`Selected nodes: ${selectedDataStringPresentation}`);
   };
 
@@ -145,17 +145,13 @@ class DataTable extends Component {
         style={{
           height: "500px",
           width: "1000px"
-        }}
-      >
+        }}>
         <Modal open={this.state.openModal} onClose={this.onCloseModal} center>
           <p>{this.state.selectedData}</p>
           {/* <p>The row data will show here.</p> */}
         </Modal>
         {/* <button onClick={this.onButtonClick}>Get selected rows</button> */}
-        <ControlBoard
-          pinColCount={this.state.pinColCount}
-          addOnePinnedCol={this.addOnePinnedCol}
-        />
+        <ControlBoard pinColCount={this.state.pinColCount} addOnePinnedCol={this.addOnePinnedCol} />
         <AgGridReact
           onGridReady={params => (this.gridApi = params.api)}
           enableSorting={true}

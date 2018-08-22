@@ -1,0 +1,58 @@
+{
+  "cars": [
+    {
+      "make": "Toyota",
+      "model": "Celica",
+      "price": 35000,
+      "category": "Sports",
+      "origin": "Japan",
+      "services": "good",
+      "dateAdded": "06/13/2009"
+    },
+    {
+      "make": "Ford",
+      "model": "Mondeo",
+      "price": 32000,
+      "category": "General",
+      "origin": "USA",
+      "services": "good",
+      "dateAdded": "09/22/2010"
+    },
+    {
+      "make": "Porsche",
+      "model": "Boxter",
+      "price": 72000,
+      "category": "Luxury Sports",
+      "origin": "Germany",
+      "services": "good",
+      "dateAdded": "06/04/2011"
+    },
+    {
+      "make": "Mercedes",
+      "model": "C Class",
+      "price": 172000,
+      "category": "Luxury",
+      "origin": "Germany",
+      "services": "good",
+      "dateAdded": "12/04/2016"
+    },
+    {
+      "make": "Audi",
+      "model": "A8",
+      "price": 212000,
+      "category": "Luxury",
+      "origin": "Germany",
+      "services": "good",
+      "dateAdded": "15/08/2012"
+    },
+    {
+      "make": "Lamborghini",
+      "model": "Huracan",
+      "price": 380000,
+      "category": "Supercar",
+      "origin": "Italy",
+      "services": "good",
+      "dateAdded": "01/07/2018"
+    }
+  ]
+}

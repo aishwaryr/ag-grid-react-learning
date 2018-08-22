@@ -10,6 +10,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 import DataTable from "./DataTable";
 import Data from "./Data";
+import Msg from "./Msg";
+import MyGrid from "./MyGrid";
 
 const App = () => (
   <BrowserRouter>
@@ -18,6 +20,8 @@ const App = () => (
         <Switch>
           <Route exact path="/" component={DataTable} />
           <Route path="/data" component={Data} />
+          <Route path="/msg" component={Msg} />
+          <Route path="/mygrid" component={MyGrid} />
         </Switch>
       </div>
     </Provider>
