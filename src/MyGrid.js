@@ -2,16 +2,33 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { fetchAllCarsFromDB } from "./api";
-import preload from "./my-grid-data.json";
+import { updateCarsDataInReduxStore, comparePrice } from "./util";
 import CarRow from "./CarRow";
 
 class MyGrid extends Component {
+  // state = {
+  //   cars: this.props.carsData
+  // };
   componentDidMount() {
     this.props.loadCarsInView();
   }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log(nextProps);
+  //   let newCars = nextProps.carsData;
+  //   return { cars: newCars };
+  //   // return nextProps.carsData === prevState.cars ? {} : { cars: newCars };
+  // }
+  sortByPrice = () => {
+    updateCarsDataInReduxStore(this.props.carsData.sort(comparePrice));
+    console.log(this.state);
+  };
 
   render() {
-    console.log(this.props);
+    const cars = this.props.carsData;
+    if (cars.length === 0) {
+      return <p>Please Wait...</p>;
+    }
+    // console.log(this.props);
     return (
       <div className="">
         <table className="table table-bordered">
@@ -27,11 +44,12 @@ class MyGrid extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.carsData.map(car => (
+            {cars.map(car => (
               <CarRow key={car.model} {...car} />
             ))}
           </tbody>
         </table>
+        <button onClick={this.sortByPrice}>Sort</button>
       </div>
     );
   }
@@ -39,7 +57,7 @@ class MyGrid extends Component {
 
 const mapStateToProps = state => {
   console.log(state);
-  const carsData = state.carsData ? state.carsData : "";
+  const carsData = state.carsData ? state.carsData : [];
   console.log(carsData);
   return {
     carsData

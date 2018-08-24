@@ -1,8 +1,6 @@
 import axios from "axios";
 
-import { loadProducts } from "./actionCreators";
-import { loadMsg } from "./actionCreators";
-import { loadCars } from "./actionCreators";
+import { loadProducts, loadMsg, loadCars } from "./actionCreators";
 import { updateReduxStore } from "./util";
 
 const BASE_URL = "http://localhost:7777";

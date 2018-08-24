@@ -1,10 +1,7 @@
 import { combineReducers } from "redux";
-import { LOAD_PRODUCTS } from "./actions";
-import { LOAD_MSG } from "./actions";
-import { LOAD_CARS } from "./actions";
+import { LOAD_PRODUCTS, LOAD_MSG, LOAD_CARS } from "./actions";
 
 const productsData = (state = {}, action) => {
-  console.log("reducer chala");
   if (action.type === LOAD_PRODUCTS) {
     return action.payload;
   }
@@ -19,9 +16,10 @@ const msgData = (state = {}, action) => {
 };
 
 const carsData = (state = [], action) => {
+  console.log(state);
   console.log(action);
   if (action.type === LOAD_CARS) {
-    return action.payload;
+    return [...action.payload];
   }
   return state;
 };

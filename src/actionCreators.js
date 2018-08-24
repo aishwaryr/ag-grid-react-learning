@@ -1,6 +1,4 @@
-import { LOAD_PRODUCTS } from "./actions";
-import { LOAD_MSG } from "./actions";
-import { LOAD_CARS } from "./actions";
+import { LOAD_PRODUCTS, LOAD_MSG, LOAD_CARS } from "./actions";
 
 export function loadProducts(productsData) {
   console.log(productsData);
