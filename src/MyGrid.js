@@ -4,20 +4,13 @@ import { connect } from "react-redux";
 import { fetchAllCarsFromDB } from "./api";
 import { updateCarsDataInReduxStore, comparePrice } from "./util";
 import CarRow from "./CarRow";
+import FilterByMake from "./FilterByMake";
 
 class MyGrid extends Component {
-  // state = {
-  //   cars: this.props.carsData
-  // };
   componentDidMount() {
     this.props.loadCarsInView();
   }
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log(nextProps);
-  //   let newCars = nextProps.carsData;
-  //   return { cars: newCars };
-  //   // return nextProps.carsData === prevState.cars ? {} : { cars: newCars };
-  // }
+
   sortByPrice = () => {
     updateCarsDataInReduxStore(this.props.carsData.sort(comparePrice));
     console.log(this.state);
@@ -28,7 +21,6 @@ class MyGrid extends Component {
     if (cars.length === 0) {
       return <p>Please Wait...</p>;
     }
-    // console.log(this.props);
     return (
       <div className="">
         <table className="table table-bordered">
@@ -44,12 +36,15 @@ class MyGrid extends Component {
             </tr>
           </thead>
           <tbody>
-            {cars.map(car => (
-              <CarRow key={car.model} {...car} />
-            ))}
+            {cars
+              .filter(car => `${car.make} ${car.model}`.toLowerCase().indexOf(this.props.filterTerm) >= 0)
+              .map(car => (
+                <CarRow key={car._id} {...car} />
+              ))}
           </tbody>
         </table>
-        <button onClick={this.sortByPrice}>Sort</button>
+        <button onClick={this.sortByPrice}>Sort by price</button>
+        <FilterByMake />
       </div>
     );
   }
@@ -58,9 +53,11 @@ class MyGrid extends Component {
 const mapStateToProps = state => {
   console.log(state);
   const carsData = state.carsData ? state.carsData : [];
+  const { filterTerm } = state;
   console.log(carsData);
   return {
-    carsData
+    carsData,
+    filterTerm
   };
 };
 
