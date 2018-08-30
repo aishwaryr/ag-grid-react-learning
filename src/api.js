@@ -26,7 +26,7 @@ export function fetchProductsFromDB() {
       .get(`${BASE_URL}/get-data/`)
       .then(response => {
         // console.log(response.data);
-        dispatch(loadProducts(response.data.products[0]));
+        dispatch(loadProducts(response.data.carsData[0]));
       })
       .catch(error => {
         console.error("axios error", error); // eslint-disable-line no-console

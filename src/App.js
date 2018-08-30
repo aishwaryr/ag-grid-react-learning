@@ -12,6 +12,8 @@ import DataTable from "./DataTable";
 import Data from "./Data";
 import Msg from "./Msg";
 import MyGrid from "./MyGrid";
+import ReduxTest from "./ReduxTest";
+// import ReduxFileView from "./ReduxFileView";
 
 const App = () => (
   <BrowserRouter>
@@ -22,6 +24,7 @@ const App = () => (
           <Route path="/data" component={Data} />
           <Route path="/msg" component={Msg} />
           <Route path="/mygrid" component={MyGrid} />
+          <Route path="/redux-test" component={ReduxTest} />
         </Switch>
       </div>
     </Provider>
