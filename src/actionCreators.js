@@ -21,6 +21,6 @@ export function setFilterTerm(term) {
 }
 
 export function loadTestData(testData) {
-  console.log(testData);
+  // console.log(testData);
   return { type: LOAD_TEST_DATA, payload: testData };
 }

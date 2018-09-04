@@ -10,68 +10,37 @@ const colDefs = [
   { headerName: "Role", field: "role", editable: true }
 ];
 
-class ReduxTest extends Component {
-  state = {
-    title: "FluxTest",
-    rows: [],
-    foo: "",
-    getRowNodeId: function(data) {
-      console.log(data);
-      return data.id;
-    }
-  };
+class ReduxTestCustom extends Component {
+  state = { title: "FluxTest" };
   componentDidMount() {
-    setTimeout(() => {
-      this.props.loadTestDataInView();
-    }, 2000);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log("@@@@@!!!!!componentWillReceiveProps  RAN RAN");
-    console.log(this.gridApi);
-    if (this.gridApi) {
-      console.log("here");
-      this.gridApi.setRowData(nextProps.rowData);
-    }
+    this.props.loadTestDataInView();
   }
   onCellValueChanged = e => {
-    // console.log("onCellValueChanged RAN OK!!");
     // e.preventDefault();
-    // console.log(e);
+    console.log(e);
+    // console.log("onCellValueChanged ran OK!");
     updateTestData(this.props.rowData, e.data, e.rowIndex);
   };
-
-  foo = e => {
-    updateTestData(this.props.rowData, { id: 23, name: "finch", role: "qwerty" }, 2);
-  };
-
   printProps = () => console.log(this.props);
-
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     // console.log(colDefs);
     return (
       <React.Fragment>
         <h3>{this.state.title}</h3>
         <button onClick={this.printProps}>Print Props</button>
-        <button onClick={this.foo}>Foo</button>
         <div
           className="ag-theme-balham"
           style={{
-            height: "800px",
-            width: "800px"
+            height: "500px",
+            width: "1000px"
           }}>
           <AgGridReact
-            onGridReady={params => {
-              this.gridApi = params.api;
-              this.gridApi.setRowData(this.props.rowData);
-            }}
-            // onGridReady={this.onGridReady}
+            onGridReady={params => (this.gridApi = params.api)}
             onCellValueChanged={this.onCellValueChanged}
+            // editType="fullRow"
             columnDefs={colDefs}
-            deltaRowDataMode={true}
-            getRowNodeId={this.state.getRowNodeId}
-            // rowData={this.props.rowData}
+            rowData={this.props.rowData}
           />
         </div>
       </React.Fragment>
@@ -80,7 +49,7 @@ class ReduxTest extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log(state);
+  console.log(state);
   const rowData = state.testData ? state.testData : [];
   return { rowData };
 };
@@ -94,6 +63,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ReduxTest);
+)(ReduxTestCustom);
 
-// export default ReduxTest;
+// export default ReduxTestCustom;

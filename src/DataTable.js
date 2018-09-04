@@ -22,15 +22,12 @@ class DataTable extends Component {
   };
 
   componentDidMount() {
-    // console.log("this.props.message");
     if (!this.props.colDefs) {
       this.props.loadProductsInView();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillRecvPropsRan");
-    console.log(this.props.products);
     if (this.props.products) {
       this.setState({
         pinColCount: this.countPinnedCols(this.props.colDefs)
@@ -39,8 +36,6 @@ class DataTable extends Component {
   }
 
   addProp(arr) {
-    // console.log(arr[7]);
-    // console.log("addPROP CALLED");
     const newItem = arr[0];
     newItem["cellRendererParams"] = {
       onClick: () => this.onButtonClick()
@@ -127,8 +122,15 @@ class DataTable extends Component {
     if (selectedData.length > 0) {
       this.onOpenModal();
     }
-    const selectedDataStringPresentation = selectedData.map(node => node.make + " " + node.model).join(", ");
+    // const selectedDataStringPresentation = selectedData.map(node => node.make + " " + node.model).join(", ");
     // console.log(`Selected nodes: ${selectedDataStringPresentation}`);
+  };
+
+  onCellValueChanged = e => {
+    console.log("onCellValueChanged RAN OK!!");
+    // e.preventDefault();
+    console.log(e);
+    // updateTestData(this.props.rowData, e.data, e.rowIndex);
   };
 
   render() {
@@ -159,6 +161,7 @@ class DataTable extends Component {
           rowSelection="multiple"
           rowDragManaged={true}
           rowHeight={40}
+          onCellValueChanged={this.onCellValueChanged}
           frameworkComponents={this.state.frameworkComponents}
           columnDefs={this.addProp(this.props.colDefs)}
           rowData={this.props.rowData}

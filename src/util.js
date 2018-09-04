@@ -13,7 +13,7 @@ export function updateCarsDataInReduxStore(cars) {
 
 export function fetchTestData(testDataArray) {
   // const testDataArray = ;
-  console.log("fetchTestData Ran in Util.js");
+  // console.log("fetchTestData Ran in Util.js");
   return store.dispatch(
     loadTestData([
       { id: 0, name: "ash", role: "dev" },
@@ -24,6 +24,7 @@ export function fetchTestData(testDataArray) {
 }
 
 export function updateTestData(dataArray, newItem, index) {
+  console.log(newItem);
   dataArray[index] = newItem;
   console.log(dataArray);
   return store.dispatch(loadTestData(dataArray));

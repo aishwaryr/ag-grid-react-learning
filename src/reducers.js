@@ -32,7 +32,7 @@ const filterTerm = (state = "", action) => {
 };
 
 const testData = (state = [], action) => {
-  console.log(state);
+  // console.log(state);
   // console.log(action);
   if (action.type === LOAD_TEST_DATA) {
     return [...action.payload];
